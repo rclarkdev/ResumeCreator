@@ -1,4 +1,5 @@
 import os
+from textblob import TextBlob
 
 def get_input(prompt):
     return input(f"{prompt.strip()} ").strip()
@@ -16,17 +17,40 @@ def collect_contact_info():
 
 def collect_summary():
     print("\n--- Professional Summary / Objective ---")
+    skip = get_input("Would you like to skip the summary section? (yes/no):")
+    if skip.lower() == 'yes':
+        return ""
     return get_input("Enter a brief summary or career objective:")
 
 def collect_skills():
     print("\n--- Skills ---")
-    skills = []
+    print("Enter your skills as comma-separated lists.")
+    print("Each list will appear as a bullet point.")
+    print("Type 'done' when finished.\n")
+
+    skill_groups = []
+
     while True:
-        skill = get_input("Enter a skill (or type 'done' to finish):")
-        if skill.lower() == 'done':
+        raw_input = get_input("Enter skills (or type 'done' to finish):")
+        if raw_input.lower() == 'done':
             break
-        skills.append(skill)
-    return skills
+
+        # Split and correct individual skills
+        corrected = []
+        for skill in raw_input.split(','):
+            skill = skill.strip()
+            if skill:
+                corrected_skill = str(TextBlob(skill).correct())
+                corrected.append(corrected_skill)
+
+        if corrected:
+            skill_groups.append(', '.join(corrected))
+
+    print("\n✅ Final Skill Groups (as bullet points):")
+    for group in skill_groups:
+        print(f" - {group}")
+
+    return skill_groups
 
 def collect_experience():
     print("\n--- Work Experience ---")
