@@ -463,45 +463,92 @@ def generate_html(resume):
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>{contact['name']} - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <style>
         body {{
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 40px;
-            background: #f7f7f7;
+            background: #e8f0fe;
             color: #333;
         }}
         .container {{
             background: #fff;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 40px 50px;
+            border-radius: 12px;
             max-width: 900px;
             margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
         }}
-        h1, h2 {{
-            color: #2c3e50;
+        h1 {{
+            color: #007acc;
+            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+        }}
+        h2 {{
+            color: #005f99;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 6px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.8rem;
         }}
         .header-info {{
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            line-height: 1.4;
+            font-size: 1rem;
+            color: #555;
+        }}
+        .header-info p a {{
+            color: #007acc;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }}
+        .header-info p a:hover {{
+            color: #004a80;
+            text-decoration: underline;
         }}
         .section {{
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }}
         ul {{
             padding-left: 20px;
+            line-height: 1.5;
+            font-size: 1rem;
+            color: #444;
+        }}
+        li {{
+            margin-bottom: 8px;
         }}
         .job, .edu, .project {{
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }}
         .job-title, .degree {{
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #004a80;
+            margin-bottom: 3px;
         }}
         .info {{
             font-style: italic;
-            color: #666;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }}
+        .project-title {{
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #005f99;
+            margin-bottom: 5px;
+        }}
+        p {{
+            font-size: 1rem;
+            margin: 0 0 10px 0;
         }}
     </style>
 </head>
@@ -510,7 +557,7 @@ def generate_html(resume):
         <div class="header-info">
             <h1>{contact['name']}</h1>
             <p>{contact['location']} | {contact['email']} | {contact['phone']}</p>
-            <p>{' | '.join(filter(None, [contact.get('linkedin', '').strip(), contact.get('github', '').strip()]))}</p>
+            <p>{' | '.join(f'<a href="{link}" target="_blank" rel="noopener noreferrer">{link}</a>' for link in filter(None, [contact.get('linkedin', '').strip(), contact.get('github', '').strip()]))}</p>
         </div>
 
         <div class="section">
@@ -564,7 +611,7 @@ def generate_html(resume):
             <h2>Projects</h2>
             {''.join(f"""
             <div class='project'>
-                <div class='project-title'><strong>{proj['name']}</strong></div>
+                <div class='project-title'>{proj['name']}</div>
                 <p>{proj['description']}</p>
                 <p><em>Tech: {proj['tech_stack']}</em></p>
             </div>
