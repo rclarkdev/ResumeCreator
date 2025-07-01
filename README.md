@@ -1,7 +1,7 @@
-🧰 Interactive Resume Builder (Python CLI Tool)
+##Interactive Resume Builder (Python CLI Tool)
 A simple and interactive command-line tool written in Python to help professionals—especially software engineers—create polished, HTML-based resumes. The tool guides you through each resume section, collects your data, and generates a clean, styled resume.html file that you can easily open or share.
 
-🚀 Features
+##Features
 Interactive prompts for comprehensive resume sections:
 
 Contact Information
@@ -24,7 +24,7 @@ Omits empty fields or sections for a clean final look
 
 Saves resume as a standalone resume.html file, ready to open in any browser
 
-🖥️ Requirements
+##Requirements
 Python 3.7 or higher
 
 TextBlob library for spell correction
@@ -37,7 +37,9 @@ bash
 Copy
 Edit
 pip install textblob beautifulsoup4
-📦 Installation & Usage
+
+##Installation & Usage
+
 Clone the repository and run the script:
 
 bash
@@ -52,7 +54,8 @@ Follow the interactive prompts to enter or update your information
 
 Your resume will be saved as resume.html in the current directory
 
-📝 Notes
+##Notes
+
 When entering skills, you can add multiple comma-separated skills per line; the tool will spell-check and organize them into bullet groups.
 
 Work experience entries support detailed bullet points and associated skills per job.
@@ -61,5 +64,5 @@ Optional sections like Certifications and Projects can be skipped if you don’t
 
 Editing existing resumes requires the input HTML to follow the tool’s specific markup structure (see generate_html function for reference).
 
-📄 License
+📄License
 MIT License
